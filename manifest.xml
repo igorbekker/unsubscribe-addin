@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:type="MailApp">
+
+  <Id>12345678-1234-1234-1234-123456789012</Id>
+  <Version>1.0.0</Version>
+  <ProviderName>MyTools</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Unsubscribe Tool"/>
+  <Description DefaultValue="One-click unsubscribe reply and delete"/>
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.3"/>
+    </Sets>
+  </Requirements>
+
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://villatelcom-my.sharepoint.com/personal/igor_villatel_com/Documents/MS%20outlook%20-%20unsub%20button/UnsubscribeAddin/taskpane.html"/>
+        <RequestedHeight>32</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadWriteMailbox</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <ExtensionPoint xsi:type="MessageReadCommandSurface">
+    <OfficeTab id="TabDefault">
+      <Group id="myGroup">
+        <Label resid="groupLabel"/>
+        <Control xsi:type="Button" id="myButton">
+          <Label resid="buttonLabel"/>
+          <Supertip>
+            <Title resid="buttonLabel"/>
+            <Description resid="buttonDesc"/>
+          </Supertip>
+          <Icon>
+            <bt:Image size="16" resid="icon16"/>
+            <bt:Image size="32" resid="icon32"/>
+            <bt:Image size="80" resid="icon80"/>
+          </Icon>
+          <Action xsi:type="ShowTaskpane">
+            <SourceLocation resid="taskpaneUrl"/>
+          </Action>
+        </Control>
+      </Group>
+    </OfficeTab>
+  </ExtensionPoint>
+
+  <Resources>
+    <bt:Images>
+      <bt:Image id="icon16" DefaultValue="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Octicons-mail.svg/16px-Octicons-mail.svg.png"/>
+      <bt:Image id="icon32" DefaultValue="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Octicons-mail.svg/32px-Octicons-mail.svg.png"/>
+      <bt:Image id="icon80" DefaultValue="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Octicons-mail.svg/80px-Octicons-mail.svg.png"/>
+    </bt:Images>
+    <bt:Urls>
+      <bt:Url id="taskpaneUrl" DefaultValue="https://villatelcom-my.sharepoint.com/personal/igor_villatel_com/Documents/MS%20outlook%20-%20unsub%20button/UnsubscribeAddin/taskpane.html"/>
+    </bt:Urls>
+    <bt:ShortStrings>
+      <bt:String id="groupLabel" DefaultValue="My Tools"/>
+      <bt:String id="buttonLabel" DefaultValue="Unsubscribe"/>
+    </bt:ShortStrings>
+    <bt:LongStrings>
+      <bt:String id="buttonDesc" DefaultValue="Send unsubscribe reply and delete this email"/>
+    </bt:LongStrings>
+  </Resources>
+
+</OfficeApp>
